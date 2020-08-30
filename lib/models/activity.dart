@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Activity {
-  DateTime date;
+  Timestamp date;
   String title;
   String explanation;
 
