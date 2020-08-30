@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "816802475138",
+    "firebase_url": "https://kramaai-7fb1f.firebaseio.com",
+    "project_id": "kramaai-7fb1f",
+    "storage_bucket": "kramaai-7fb1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816802475138:android:c2619d384deb5e41de589b",
+        "android_client_info": {
+          "package_name": "com.falconapplications.kramaai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816802475138-jnc61qhdcl38c2n0b8sg888o6uksbd19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH6cwjRHxo4bAIqQwcrP53QCyC8kNPwH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816802475138-jnc61qhdcl38c2n0b8sg888o6uksbd19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
