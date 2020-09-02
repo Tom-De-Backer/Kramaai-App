@@ -11,3 +11,6 @@ const textInputDecoration = InputDecoration(
   ),
   );
 
+
+const kPrimaryColor = Color(0xFF1B5E20); // = Colors.green[900];
+final kSecondaryColor = Colors.green[700];

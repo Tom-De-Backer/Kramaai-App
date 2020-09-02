@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kramaai/screens/authenticate/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:kramaai/screens/authenticate/welcome_screen.dart';
 import 'package:kramaai/screens/feed.dart';
 import 'package:kramaai/services/activity_notifier.dart';
 import 'package:kramaai/services/auth_notifier.dart';
+import 'package:kramaai/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'models/kramaai_user.dart';
 
@@ -29,15 +31,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       title: 'Scouts Kramaai Mollem',
       theme: ThemeData(
-        primaryColor: Colors.green[900],
-        accentColor: Colors.green[700],
+        primaryColor: kPrimaryColor,
+        accentColor: kSecondaryColor,
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: Consumer<AuthNotifier>(
         builder: (context, notifier, child) {
-          return notifier.user != null ? Feed() : Login();
+          return notifier.user != null ? Feed() : WelcomeScreen();
         },
       ),
     );

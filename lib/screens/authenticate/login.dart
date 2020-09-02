@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kramaai/models/kramaai_user.dart';
+import 'package:kramaai/screens/authenticate/background_login.dart';
+import 'package:kramaai/screens/authenticate/background_welcome_screen.dart';
 import 'package:kramaai/services/auth_notifier.dart';
 import 'package:kramaai/services/auth_api.dart';
+import 'package:kramaai/shared/constants.dart';
+import 'package:kramaai/shared/rounded_button.dart';
 import 'package:provider/provider.dart';
 
 enum AuthMode { Signup, Login }
@@ -47,11 +51,11 @@ class _LoginState extends State<Login> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: "Display Name",
-        labelStyle: TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: Colors.black),
       ),
       keyboardType: TextInputType.text,
-      style: TextStyle(fontSize: 26, color: Colors.white),
-      cursorColor: Colors.white,
+      style: TextStyle(fontSize: 26, color: Colors.black),
+      cursorColor: Colors.black,
       validator: (String value) {
         if (value.isEmpty) {
           return 'Display Name is required';
@@ -73,12 +77,12 @@ class _LoginState extends State<Login> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: "Email",
-        labelStyle: TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: Colors.black38),
       ),
       keyboardType: TextInputType.emailAddress,
-      initialValue: 'julian@food.com',
-      style: TextStyle(fontSize: 26, color: Colors.white),
-      cursorColor: Colors.white,
+      initialValue: 'tom_debacker',
+      style: TextStyle(fontSize: 26, color: Colors.black),
+      cursorColor: Colors.black,
       validator: (String value) {
         if (value.isEmpty) {
           return 'Email is required';
@@ -102,10 +106,10 @@ class _LoginState extends State<Login> {
     return TextFormField(
       decoration: InputDecoration(
         labelText: "Password",
-        labelStyle: TextStyle(color: Colors.white54),
+        labelStyle: TextStyle(color: Colors.black38),
       ),
-      style: TextStyle(fontSize: 26, color: Colors.white),
-      cursorColor: Colors.white,
+      style: TextStyle(fontSize: 26, color: Colors.black),
+      cursorColor: Colors.black,
       obscureText: true,
       controller: _passwordController,
       validator: (String value) {
@@ -146,13 +150,10 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     print("Building login screen");
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Container(
-        constraints: BoxConstraints.expand(
-          height: MediaQuery.of(context).size.height,
-        ),
-        decoration: BoxDecoration(color: Colors.green[900]),
+      body: BackgroundLogin(
         child: Form(
           autovalidate: true,
           key: _formKey,
@@ -172,33 +173,40 @@ class _LoginState extends State<Login> {
                   _buildPasswordField(),
                   _authMode == AuthMode.Signup ? _buildConfirmPasswordField() : Container(),
                   SizedBox(height: 32),
-                  ButtonTheme(
-                    minWidth: 200,
-                    child: RaisedButton(
-                      padding: EdgeInsets.all(10.0),
-                      child: Text(
-                        'Switch to ${_authMode == AuthMode.Login ? 'Signup' : 'Login'}',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _authMode =_authMode == AuthMode.Login ? AuthMode.Signup : AuthMode.Login;
-                        });
-                      },
-                    ),
+//                  ButtonTheme(
+//                    minWidth: 200,
+//                    child: RaisedButton(
+//                      padding: EdgeInsets.all(10.0),
+//                      child: Text(
+//                        'Switch to ${_authMode == AuthMode.Login ? 'Signup' : 'Login'}',
+//                        style: TextStyle(fontSize: 20, color: Colors.white),
+//                      ),
+//                      onPressed: () {
+//                        setState(() {
+//                          _authMode =_authMode == AuthMode.Login ? AuthMode.Signup : AuthMode.Login;
+//                        });
+//                      },
+//                    ),
+//                  ),
+//                  SizedBox(height: 16),
+                  RoundedButton(
+                    text: "LOGIN",
+                    color: kSecondaryColor,
+                    press: () {
+                      _submitForm();
+                    },
                   ),
-                  SizedBox(height: 16),
-                  ButtonTheme(
-                    minWidth: 200,
-                    child: RaisedButton(
-                      padding: EdgeInsets.all(10.0),
-                      onPressed: () => _submitForm(),
-                      child: Text(
-                        _authMode == AuthMode.Login ? 'Login' : 'Signup',
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    ),
-                  ),
+//                  ButtonTheme(
+//                    minWidth: 200,
+//                    child: RaisedButton(
+//                      padding: EdgeInsets.all(10.0),
+//                      onPressed: () => _submitForm(),
+//                      child: Text(
+//                        _authMode == AuthMode.Login ? 'Login' : 'Signup',
+//                        style: TextStyle(fontSize: 20, color: Colors.white),
+//                      ),
+//                    ),
+//                  ),
                 ],
               ),
             ),
