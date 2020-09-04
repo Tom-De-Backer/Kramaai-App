@@ -3,7 +3,7 @@ import 'package:kramaai/screens/authenticate/background_welcome_screen.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kramaai/shared/constants.dart';
 import 'package:kramaai/shared/rounded_button.dart';
-import 'login.dart';
+import 'login_screen.dart';
 
 
 class WelcomeScreenBody extends StatelessWidget {
@@ -38,14 +38,14 @@ class WelcomeScreenBody extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                  return Login();
+                  return Login(mode: 1);
                   },
                 ),
               );
             },
           ),
           RoundedButton(
-            text: "SIGN UP",
+            text: "REGISTREER",
             color: kPrimaryColor,
             textColor: Colors.white,
             press: () {
@@ -53,7 +53,7 @@ class WelcomeScreenBody extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                  return Login();
+                  return Login(mode: 0);
                   },
                 ),
               );

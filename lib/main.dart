@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kramaai/screens/authenticate/login.dart';
+import 'package:kramaai/screens/authenticate/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kramaai/screens/authenticate/welcome_screen.dart';
 import 'package:kramaai/screens/feed.dart';
