@@ -46,7 +46,7 @@ class RoundedPasswordField extends StatelessWidget {
               return 'Wachtwoord is verplicht';
             }
 
-            if (value.length < 5) {
+            if (value.length < 6) {
               return 'Wachtwoord is te kort';
             }
 

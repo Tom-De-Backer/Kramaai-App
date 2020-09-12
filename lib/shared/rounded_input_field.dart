@@ -33,7 +33,7 @@ class RoundedInputField extends StatelessWidget {
           border: InputBorder.none,
         ),
         keyboardType: TextInputType.emailAddress,
-        initialValue: 'tom_debacker@msn.com',
+        initialValue: 't@db.be',
         style: TextStyle(fontSize: 26, color: Colors.black),
         validator: (String value) {
           if (value.isEmpty) {

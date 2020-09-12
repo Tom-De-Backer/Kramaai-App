@@ -1,9 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kramaai/screens/activityDetail.dart';
 import 'package:kramaai/services/activity_api.dart';
 import 'package:kramaai/services/activity_notifier.dart';
-import 'package:kramaai/services/auth_api.dart';
 import 'package:kramaai/services/auth_notifier.dart';
+import 'package:kramaai/shared/constants.dart';
 import 'package:provider/provider.dart';
 
 class Feed extends StatefulWidget {
@@ -27,22 +28,15 @@ class _FeedState extends State<Feed> {
     print("Building Feed");
 
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          authNotifier.user != null ? authNotifier.user.displayName : "Feed"
+    return CupertinoPageScaffold(
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(
+          "Welkom ${authNotifier.user.displayName}",
+//          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
-        actions: [
-          FlatButton(
-            onPressed: () => signout(authNotifier),
-            child: Text(
-              "Logout",
-              style: TextStyle(fontSize: 20, color: Colors.white),
-            )
-          )
-        ],
+        backgroundColor: kSecondaryColor,
       ),
-      body: ListView.separated(
+      child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
 
             var date = activityNotifier.activityList[index].date.toDate();
@@ -62,9 +56,9 @@ class _FeedState extends State<Feed> {
             ];
 
 //            TODO: Vergelijk datum met vandaag!
-            if (date.isBefore(DateTime.now())) {
+//            if (date.isBefore(DateTime.now())) {
 //              return Container();
-            }
+//            }
 
 
             return ListTile(

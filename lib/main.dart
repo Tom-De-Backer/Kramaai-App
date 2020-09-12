@@ -3,6 +3,7 @@ import 'package:kramaai/screens/authenticate/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kramaai/screens/authenticate/welcome_screen.dart';
 import 'package:kramaai/screens/feed.dart';
+import 'package:kramaai/screens/home/navigation_bar.dart';
 import 'package:kramaai/services/activity_notifier.dart';
 import 'package:kramaai/services/auth_notifier.dart';
 import 'package:kramaai/shared/constants.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Consumer<AuthNotifier>(
         builder: (context, notifier, child) {
-          return notifier.user != null ? Feed() : WelcomeScreen();
+          return notifier.user != null ? NavigationBar() : WelcomeScreen();
         },
       ),
     );
