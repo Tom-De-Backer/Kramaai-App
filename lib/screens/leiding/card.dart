@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+import 'package:kramaai/shared/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:kramaai/models/leider.dart';
 
 class LeidingCard extends StatefulWidget {
   final int index;
   final String group;
-  final List<String> names;
+  final List<Leider> leiders;
   final BuildContext context;
-  var dummyPicture;
 
   LeidingCard({
     Key key,
     @required this.group,
     @required this.index,
-    @required this.names,
+    @required this.leiders,
     @required this.context,
   }) : super(key: key);
 
@@ -22,52 +24,84 @@ class LeidingCard extends StatefulWidget {
 }
 
 class _LeidingCardState extends State<LeidingCard> {
-  get dummyPicture => null;
-  set dummyPicture(ByteData dummyPicture) {}
-
-  @override
-  void initState() {
-    rootBundle
-        .load('assets/images/account.png')
-        .then((data) => setState(() => print(data)));
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    print(dummyPicture);
+    List<Leider> leiders = this.widget.leiders;
     return Column(
       children: [
-        Text(
-          this.widget.group,
-          style: TextStyle(fontSize: 30),
+        Container(
+          padding: EdgeInsets.all(20),
+          width: double.infinity,
+          color: kPrimaryColor,
+          child: Center(
+            child: Text(
+              this.widget.group,
+              style: TextStyle(fontSize: 30, color: Colors.white),
+            ),
+          ),
         ),
-        for (var i = 0; i < this.widget.names.length; i++)
-          buildOneLeidingCard(context, this.widget.names[i], dummyPicture),
+        for (var i = 0; i < this.widget.leiders.length; i++)
+          buildOneLeidingCard(
+              context, leiders[i].name, leiders[i].cellphone, leiders[i].email),
       ],
     );
   }
 }
 
-buildOneLeidingCard(BuildContext context, String name, dummyPicture) {
+buildOneLeidingCard(
+    BuildContext context, String name, String cellphone, String email) {
   return Card(
-    child: Row(
-      children: [
-        Container(
-          width: 150,
-          padding: EdgeInsets.fromLTRB(20, 5, 0, 5),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(70),
-            child: FadeInImage(
-              placeholder: AssetImage('./assets/images/account.png'),
-              image: NetworkImage(
-                  'https://media-exp1.licdn.com/dms/image/C4D03AQEIrc53iSHLbw/profile-displayphoto-shrink_200_200/0?e=1605139200&v=beta&t=jydg6MFQzr7_YyotN14UR9DVfmb3TPfiQQC9vIjcKt0'),
+    child: Container(
+      padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 130,
+            padding: EdgeInsets.fromLTRB(20, 5, 0, 5),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(70),
+              child: FadeInImage(
+                placeholder: AssetImage('./assets/images/account.png'),
+                image: NetworkImage(
+                    'https://kramaai.be/images/leiders/${name.replaceAll(new RegExp(r"\s+"), "").toLowerCase()}.jpg'),
+              ),
             ),
           ),
-        ),
-        Spacer(),
-        Text(name),
-      ],
+          Spacer(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                name,
+                style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              FlatButton(
+                child: Text(
+                  cellphone,
+                  style: TextStyle(fontSize: 19, color: Colors.black),
+                ),
+                onPressed: () => launch("tel:" + cellphone),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              FlatButton(
+                child: Text(
+                  email,
+                  style: TextStyle(fontSize: 14),
+                ),
+                onPressed: () => launch("mailto:" + email),
+              )
+            ],
+          ),
+          Spacer()
+        ],
+      ),
     ),
   );
 }
