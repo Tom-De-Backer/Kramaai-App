@@ -39,7 +39,7 @@ class RoundedPasswordField extends StatelessWidget {
 //          ),
           border: InputBorder.none,
         ),
-        style: TextStyle(fontSize: 26, color: Colors.black),
+        style: TextStyle(fontSize: 20, color: Colors.black),
         validator: (String value) {
           if (!this.confirm) {
             if (value.isEmpty) {

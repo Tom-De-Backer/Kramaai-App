@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kramaai/screens/authenticate/background_welcome_screen.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:kramaai/shared/constants.dart';
 import 'package:kramaai/shared/rounded_button.dart';
 import 'login_screen.dart';

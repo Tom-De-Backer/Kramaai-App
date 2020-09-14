@@ -6,18 +6,32 @@ import 'package:kramaai/services/auth_notifier.dart';
 import 'package:provider/provider.dart';
 
 class Settings extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    AuthNotifier authNotifier =
+        Provider.of<AuthNotifier>(context, listen: false);
 
     return Scaffold(
-      body: Center(
-        child: RoundedButton(
-          text: 'Log uit',
-          press: () => signout(authNotifier),
+        body: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: RoundedButton(
+            text: 'Log uit',
+            press: () => signout(authNotifier),
+          ),
         ),
-      )
-    );
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Designed and created by "),
+            Text(
+              "Falcon Applications",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
+      ],
+    ));
   }
 }

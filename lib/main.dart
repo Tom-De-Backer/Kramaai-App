@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kramaai/screens/authenticate/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kramaai/screens/authenticate/welcome_screen.dart';
-import 'package:kramaai/screens/feed.dart';
 import 'package:kramaai/screens/home/navigation_bar.dart';
 import 'package:kramaai/services/activity_notifier.dart';
 import 'package:kramaai/services/auth_notifier.dart';
 import 'package:kramaai/shared/constants.dart';
 import 'package:provider/provider.dart';
-import 'models/kramaai_user.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

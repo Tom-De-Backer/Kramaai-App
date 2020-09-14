@@ -34,7 +34,7 @@ class RoundedInputField extends StatelessWidget {
         ),
         keyboardType: TextInputType.emailAddress,
         initialValue: 't@db.be',
-        style: TextStyle(fontSize: 26, color: Colors.black),
+        style: TextStyle(fontSize: 20, color: Colors.black),
         validator: (String value) {
           if (value.isEmpty) {
             return 'Email is required';

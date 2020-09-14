@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kramaai/models/kramaai_user.dart';
 import 'package:kramaai/screens/authenticate/background_login.dart';
-import 'package:kramaai/screens/authenticate/background_welcome_screen.dart';
 import 'package:kramaai/services/auth_notifier.dart';
 import 'package:kramaai/services/auth_api.dart';
 import 'package:kramaai/shared/constants.dart';
@@ -75,8 +74,8 @@ class _LoginState extends State<Login> {
           border: InputBorder.none,
         ),
         keyboardType: TextInputType.emailAddress,
-        initialValue: 'tom001',
-        style: TextStyle(fontSize: 26, color: Colors.black),
+        initialValue: 'Tom001',
+        style: TextStyle(fontSize: 20, color: Colors.black),
 
         validator: (String value) {
           if (value.isEmpty) {
@@ -128,6 +127,18 @@ class _LoginState extends State<Login> {
     );
   }
 
+  toRegister() {
+    setState(() {
+      _authMode = AuthMode.Signup;
+    });
+  }
+
+  toLogin() {
+    setState(() {
+      _authMode = AuthMode.Login;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     print("Building login screen");
@@ -168,6 +179,27 @@ class _LoginState extends State<Login> {
                       _submitForm();
                     },
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        _authMode == AuthMode.Login ? "Heb je nog geen account? " : "Heb je al een account? ",
+                        style: TextStyle(
+                          color: kPrimaryColor
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: _authMode == AuthMode.Login ? toRegister : toLogin,
+                        child: Text(
+                          _authMode == AuthMode.Login ? "Registreer hier" : "Log in",
+                          style: TextStyle(
+                            color: kPrimaryColor,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),

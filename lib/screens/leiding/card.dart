@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter/services.dart';
 import 'package:kramaai/shared/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:kramaai/models/leider.dart';
@@ -30,7 +29,7 @@ class _LeidingCardState extends State<LeidingCard> {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(12),
           width: double.infinity,
           color: kPrimaryColor,
           child: Center(
@@ -51,6 +50,7 @@ class _LeidingCardState extends State<LeidingCard> {
 buildOneLeidingCard(
     BuildContext context, String name, String cellphone, String email) {
   return Card(
+    margin: EdgeInsets.fromLTRB(10, 15, 10, 15),
     child: Container(
       padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
       child: Row(

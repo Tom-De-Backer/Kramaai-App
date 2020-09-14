@@ -1,4 +1,4 @@
-import 'dart:collection';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,46 +6,45 @@ import 'package:kramaai/models/leider.dart';
 import 'package:kramaai/screens/leiding/card.dart';
 import 'package:kramaai/shared/constants.dart';
 
-class Leiding extends StatelessWidget {
-  final Map<String, List<Leider>> leiding = {
-    'Kapoenen': [
-      Leider('Karo', '+32 474 40 29 10'),
-      Leider('Tom', '+32 474 40 29 12'),
-      Leider('Inne', '+32 474 40 29 12'),
-      Leider('Lorraine', '+32 474 40 29 12'),
-      Leider('Matisse', '+32 474 40 29 12')
-    ],
-    'Welpen': [
-      Leider('Joke Clynhens', '+32 474 40 29 10'),
-      Leider('Chloe', '+32 474 40 29 12'),
-      Leider('Mats', '+32 474 40 29 12'),
-      Leider('Gilles', '+32 474 40 29 12'),
-      Leider('Joke Van Houcke', '+32 474 40 29 12')
-    ],
-    'Bevers': [
-      Leider('Frederic', '+32 474 40 29 10'),
-      Leider('Anse', '+32 474 40 29 12'),
-      Leider('Manse', '+32 474 40 29 12'),
-      Leider('David', '+32 474 40 29 12'),
-      Leider('Bram', '+32 474 40 29 12')
-    ],
-    'Jong-Givers': [
-      Leider('Liesa', '+32 474 40 29 10'),
-      Leider('Daan', '+32 474 40 29 12'),
-      Leider('Hanne', '+32 474 40 29 12'),
-      Leider('Arthur', '+32 474 40 29 12'),
-    ],
-    'Givers': [
-      Leider('Amber', '+32 474 40 29 10'),
-      Leider('Anke', '+32 474 40 29 12'),
-      Leider('Lennart', '+32 474 40 29 12'),
-    ],
-    'Jins': [
-      Leider('Hannah', '+32 474 40 29 10'),
-      Leider('Sander', '+32 474 40 29 12'),
-      Leider('Thomas', '+32 474 40 29 12'),
-    ],
-  };
+class Leiding extends StatefulWidget {
+  @override
+  _LeidingState createState() => _LeidingState();
+}
+
+class _LeidingState extends State<Leiding> {
+
+  Map<String, List<Leider>> leiding = new Map<String, List<Leider>>();
+
+//  Get leiders and put them in a key value Map
+  getLeiders() async {
+    try {
+      var leiders = await FirebaseFirestore.instance.collection('Leiders').get();
+      if (leiders.docs.isNotEmpty) {
+        var leidersList =  leiders.docs
+            .map((snapshot) => Leider.fromMap(snapshot.data()))
+            .toList();
+
+        for (var i = 0; i < leidersList.length; i++) {
+          var group = leidersList[i].group;
+          setState(() {
+            if (leiding[group] == null) {
+              leiding[group] = [leidersList[i]];
+            } else {
+              leiding[group].add(leidersList[i]);
+            }
+          });
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getLeiders();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +76,7 @@ class Leiding extends StatelessWidget {
         name = 'Bevers';
         break;
       case 3:
-        name = 'Jong-Givers';
+        name = 'Jong givers';
         break;
       case 4:
         name = 'Givers';
