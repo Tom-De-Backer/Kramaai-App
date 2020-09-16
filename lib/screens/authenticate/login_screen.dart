@@ -37,8 +37,8 @@ class _LoginState extends State<Login> {
     } else {
       _authMode = AuthMode.Login;
     }
-    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    initializeCurrentUser(authNotifier);
+//    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+//    checkExistingUser(authNotifier);
     super.initState();
   }
 

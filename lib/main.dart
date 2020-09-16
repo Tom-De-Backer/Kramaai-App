@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:kramaai/screens/authenticate/welcome_screen.dart';
 import 'package:kramaai/screens/home/navigation_bar.dart';
 import 'package:kramaai/services/activity_notifier.dart';
+import 'package:kramaai/services/auth_api.dart';
 import 'package:kramaai/services/auth_notifier.dart';
 import 'package:kramaai/shared/constants.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+
+    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    checkExistingUser(authNotifier);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Scouts Kramaai Mollem',

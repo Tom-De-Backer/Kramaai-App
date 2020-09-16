@@ -46,7 +46,7 @@ signout(AuthNotifier authNotifier) async {
   authNotifier.setUser(null);
 }
 
-initializeCurrentUser(AuthNotifier authNotifier) async {
+checkExistingUser(AuthNotifier authNotifier) async {
   User firebaseUser = FirebaseAuth.instance.currentUser;
 
   if (firebaseUser != null) {

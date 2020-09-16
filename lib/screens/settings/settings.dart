@@ -24,7 +24,7 @@ class Settings extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Designed and created by "),
+            Text("Created by "),
             Text(
               "Falcon Applications",
               style: TextStyle(fontWeight: FontWeight.bold),
