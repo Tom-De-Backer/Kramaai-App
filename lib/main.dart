@@ -7,6 +7,7 @@ import 'package:kramaai/services/auth_api.dart';
 import 'package:kramaai/services/auth_notifier.dart';
 import 'package:kramaai/shared/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,11 +26,41 @@ void main() async {
   ));
 }
 
+Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
+  if (message.containsKey('data')) {
+    // Handle data message
+    final dynamic data = message['data'];
+  }
+
+  if (message.containsKey('notification')) {
+    // Handle notification message
+    final dynamic notification = message['notification'];
+  }
+
+  // Or do other work.
+}
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
 
+    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+//        _showItemDialog(message);
+      },
+      onBackgroundMessage: myBackgroundMessageHandler,
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+//        _navigateToItemDetail(message);
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+//        _navigateToItemDetail(message);
+      },
+    );
 
     AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     checkExistingUser(authNotifier);

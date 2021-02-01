@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kramaai/screens/settings/settings.dart';
 import 'package:kramaai/shared/constants.dart';
+import 'package:kramaai/takken/activityPerTak.dart';
 
 class Takken extends StatelessWidget {
   final List<String> _groups = [
@@ -18,8 +19,10 @@ class Takken extends StatelessWidget {
         .map((item) => InkWell(
               onTap: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (BuildContext context) {
-                      return CupertinoPageScaffold(child: Settings());
+                    CupertinoPageRoute(builder: (BuildContext context) {
+                      return Scaffold(
+                        body: CupertinoPageScaffold(child: ActivityPerTak(tak: item)),
+                      );
                     })
                 );
               },
