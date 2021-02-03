@@ -5,6 +5,7 @@ import 'package:kramaai/screens/home/navigation_bar.dart';
 import 'package:kramaai/services/activity_notifier.dart';
 import 'package:kramaai/services/auth_api.dart';
 import 'package:kramaai/services/auth_notifier.dart';
+import 'package:kramaai/services/post_notifier.dart';
 import 'package:kramaai/shared/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -20,6 +21,9 @@ void main() async {
       ),
       ChangeNotifierProvider(
         create: (context) => ActivityNotifier(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => PostNotifier(),
       ),
     ],
     child: MyApp(),
