@@ -30,7 +30,22 @@ class _ActivityPerTakNewState extends State<ActivityPerTakNew> {
   Widget build(BuildContext context) {
     ActivityNotifier activityNotifier = Provider.of<ActivityNotifier>(context);
 
-    print("Building Feed");
+    print("Building ActivityPerTakNew");
+
+    List<String> months = [
+      'januari',
+      'februari',
+      'maart',
+      'april',
+      'mei',
+      'juni',
+      'juli',
+      'augustus',
+      'september',
+      'oktober',
+      'november',
+      'december'
+    ];
 
     List<Activity> filteredList = activityNotifier.activityList
         .where(
@@ -58,95 +73,110 @@ class _ActivityPerTakNewState extends State<ActivityPerTakNew> {
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height - 200,
+                height: 600,
+//                padding: const EdgeInsets.only(left:0),
                 child: Swiper(
                   itemCount: filteredList.length,
                   itemWidth: MediaQuery.of(context).size.width - 2 * 40,
                   layout: SwiperLayout.STACK,
+                  pagination: SwiperPagination(
+                    builder: DotSwiperPaginationBuilder(
+                      activeSize: 15,
+                      space: 8,
+                    ),
+                  ),
                   itemBuilder: (context, index) {
-                    return Stack(
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            SizedBox(height: 100),
-                            Card(
-                              elevation: 8,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(32),
-                              ),
-                              color: Colors.white,
-                              child: Padding(
-                                padding: const EdgeInsets.all(32.0),
-                                child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    SizedBox(height: 100),
-                                    Text(
-                                      filteredList[index].title,
-                                      style: TextStyle(
-                                        fontFamily: 'Avenir',
-                                        fontSize: 44,
-                                        color: const Color(0xff47455f),
-                                        fontWeight: FontWeight.w900,
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(context, PageRouteBuilder());
+                      },
+                      child: Stack(
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              SizedBox(height: 100),
+                              Card(
+                                elevation: 8,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32),
+                                ),
+                                color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(32.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      SizedBox(height: 60),
+                                      Text(
+                                        filteredList[index].title,
+                                        style: TextStyle(
+                                          fontFamily: 'Avenir',
+                                          fontSize: 44,
+                                          color: const Color(0xff47455f),
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                        textAlign: TextAlign.left,
                                       ),
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    Text(
-                                      'Solar System',
-                                      style: TextStyle(
-                                        fontFamily: 'Avenir',
-                                        fontSize: 23,
-                                        color: kPrimaryColor,
-                                        fontWeight: FontWeight.w500,
+                                      SizedBox(height: 10),
+                                      Text(
+                                        months[filteredList[index].date.toDate().month - 1],
+                                        style: TextStyle(
+                                          fontFamily: 'Avenir',
+                                          fontSize: 23,
+                                          color: kPrimaryColor,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        textAlign: TextAlign.left,
                                       ),
-                                      textAlign: TextAlign.left,
-                                    ),
-                                    SizedBox(height: 32),
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          'Know more',
-                                          style: TextStyle(
-                                            fontFamily: 'Avenir',
-                                            fontSize: 18,
-                                            color: kSecondaryColor,
-                                            fontWeight: FontWeight.w500,
+                                      SizedBox(height: 120),
+                                      Row(
+                                        children: <Widget>[
+                                          Text(
+                                            'Meer info ',
+                                            style: TextStyle(
+                                              fontFamily: 'Avenir',
+                                              fontSize: 18,
+                                              color: kSecondaryColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                            textAlign: TextAlign.left,
                                           ),
-                                          textAlign: TextAlign.left,
-                                        ),
-                                        Icon(
-                                          Icons.arrow_forward,
-                                          color: Colors.black,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                          Icon(
+                                            Icons.arrow_forward,
+                                            color: kSecondaryColor,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Hero(
-                          tag: index + 1,
-                          child: Image.asset(
-                              "assets/images/takken/${widget.tak.toLowerCase()}.png"),
-                        ),
-                        Positioned(
-                          right: 24,
-                          bottom: 60,
-                          child: Text(
-                            (index + 1).toString(),
-                            style: TextStyle(
-                              fontFamily: 'Avenir',
-                              fontSize: 200,
-                              color: Colors.black.withOpacity(0.08),
-                              fontWeight: FontWeight.w900,
-                            ),
-                            textAlign: TextAlign.left,
+                            ],
                           ),
-                        ),
-                      ],
+                          Hero(
+                            tag: widget.tak,
+                            child: Image.asset(
+                                "assets/images/takken/${widget.tak.toLowerCase().replaceAll(new RegExp(r'[^\w\s]+'),'')}.png",
+                                height: 200,
+                            ),
+                          ),
+                          Positioned(
+                            right: 24,
+                            bottom: 60,
+                            child: Text(
+                              filteredList[index].date.toDate().day.toString(),
+                              style: TextStyle(
+                                fontFamily: 'Avenir',
+                                fontSize: 200,
+                                color: Colors.black.withOpacity(0.08),
+                                fontWeight: FontWeight.w900,
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),

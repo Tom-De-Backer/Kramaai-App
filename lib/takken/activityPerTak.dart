@@ -31,7 +31,7 @@ class _ActivityPerTakState extends State<ActivityPerTak> {
 //    AuthNotifier authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     ActivityNotifier activityNotifier = Provider.of<ActivityNotifier>(context);
 
-    print("Building Feed");
+    print("Building ActivityPerTak");
 
     List<Activity> filteredList = activityNotifier.activityList
         .where(
