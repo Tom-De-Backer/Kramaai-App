@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kramaai/screens/settings/settings.dart';
 import 'package:kramaai/shared/constants.dart';
 import 'package:kramaai/takken/activityPerTak.dart';
+import 'package:kramaai/takken/activityPerTakNew.dart';
 
 class Takken extends StatelessWidget {
   final List<String> _groups = [
@@ -21,7 +21,7 @@ class Takken extends StatelessWidget {
                 Navigator.of(context).push(
                     CupertinoPageRoute(builder: (BuildContext context) {
                       return Scaffold(
-                        body: CupertinoPageScaffold(child: ActivityPerTak(tak: item)),
+                        body: CupertinoPageScaffold(child: ActivityPerTakNew(tak: item)),
                       );
                     })
                 );

@@ -40,6 +40,7 @@ dev_dependencies:
   flutter_spinkit: ^4.1.2+1
   url_launcher:
   firebase_messaging: ^7.0.0
+  flutter_swiper: ^1.1.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
